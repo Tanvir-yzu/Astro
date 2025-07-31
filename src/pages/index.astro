@@ -1,0 +1,19 @@
+---
+import Welcome from '../components/Welcome.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<Welcome />
+
+	<div class="p-8">
+		<h2 class="text-2xl font-bold">Check out these pages:</h2>
+		<ul class="list-disc list-inside mt-4">
+			<li><a href="/about" class="text-blue-500 hover:underline">About Page</a></li>
+			<li><a href="/dogs/clifford" class="text-blue-500 hover:underline">Dog Page (Clifford)</a></li>
+			<li><a href="/sequences/one/two/three" class="text-blue-500 hover:underline">Sequence 1</a></li>
+			<li><a href="/sequences/four" class="text-blue-500 hover:underline">Sequence 2</a></li>
+			<li><a href="/sequences" class="text-blue-500 hover:underline">Sequence (Root)</a></li>
+		</ul>
+	</div>
+</Layout>

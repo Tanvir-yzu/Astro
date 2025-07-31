@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  // Ask Astro to pre-generate 100 pages
+  const res   = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const posts = await res.json();
+
+  return posts.map((post: { id: number; title: string; body: string }) => ({
+    params: { id: String(post.id) },
+    props : { post }          // will be available as Astro.props.post
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<Layout>
+  <div class="p-8">
+    <nav><a href="/posts/" class="text-blue-500 hover:underline">← Back to List</a></nav>
+    <h1 class="text-3xl font-bold mt-4">{(post as { title: string }).title}</h1>
+    <p class="text-gray-600 mt-2"><strong>Author ID:</strong> {(post as { userId: number }).userId}</p>
+    <article class="mt-4 prose lg:prose-xl">
+      {(post as { body: string }).body.replace(/\n/g, ' ')}
+    </article>
+  </div>
+</Layout>

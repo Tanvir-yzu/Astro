@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { dog: "clifford" } },
+    { params: { dog: "rover" } },
+    { params: { dog: "spot" } },
+  ];
+}
+
+const { dog } = Astro.params;
+---
+
+<Layout>
+  <main class="p-8">
+    <h1 class="text-3xl font-bold capitalize">Good dog, {dog}!</h1>
+    <p class="mt-4">This is a dynamically generated page for {dog}.</p>
+    <a href="/about" class="text-blue-500 hover:underline mt-4 inline-block">Go to About Page</a>
+  </main>
+</Layout>

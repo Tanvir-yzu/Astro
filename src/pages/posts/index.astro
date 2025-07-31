@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+// fetch all posts at BUILD time
+const res   = await fetch('https://jsonplaceholder.typicode.com/posts');
+const posts = await res.json();
+---
+
+<Layout>
+  <div class="p-8">
+    <h1 class="text-3xl font-bold">100 Posts</h1>
+    <ul class="list-disc list-inside mt-4">
+      {posts.map((post: { id: number; title: string; body: string }) => {
+        return (
+          <li>
+            <a href={`/posts/${post.id}`} class="text-blue-500 hover:underline">{post.id}: {(post as { title: string }).title}</a>
+            <p class="text-gray-500 text-sm">{(post as { body: string }).body.replace(/\n/g, ' ').slice(0, 100)}...</p>
+          </li>
+        )
+      })}
+    </ul>
+    <a href="/" class="text-blue-500 hover:underline mt-8 inline-block">Back to Home</a>
+  </div>
+</Layout>       

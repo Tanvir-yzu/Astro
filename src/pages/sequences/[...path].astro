@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { path: "one/two/three" } },
+    { params: { path: "four" } },
+    { params: { path: undefined } } // Matches /sequences/
+  ];
+}
+
+const { path } = Astro.params;
+---
+
+<Layout>
+  <main class="p-8">
+    <h1 class="text-3xl font-bold">Catch-all Route</h1>
+    <p class="mt-4">The path for this page is:</p>
+    <pre class="bg-gray-100 p-4 rounded mt-2">/sequences/{path || ''}</pre>
+    <a href="/" class="text-blue-500 hover:underline mt-4 inline-block">Go back home</a>
+  </main>
+</Layout>
